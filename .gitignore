@@ -213,9 +213,3 @@ sysinfo.txt
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # End of https://www.toptal.com/developers/gitignore/api/rider,unity
-<<<<<<< HEAD
-.idea/.idea.Learn2Code/.idea/
-
-.vsconfig
-=======
->>>>>>> 90df50b86ccae8be9a4942ebec42241d66d3cda6
