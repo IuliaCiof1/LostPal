@@ -214,3 +214,5 @@ sysinfo.txt
 
 # End of https://www.toptal.com/developers/gitignore/api/rider,unity
 .idea/.idea.Learn2Code/.idea/
+
+.vsconfig
