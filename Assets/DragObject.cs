@@ -89,7 +89,7 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         {
             //parentOfDraggingObject = CodeStorage;
             //draggingObject.pa = CodeStorage.transform;
-            transform.SetParent(CodeStorage); //revert to initial hierarcy
+            transform.SetParent(CodeStorage); //revert to initial hierarc
         }
 
         image.raycastTarget = true;
