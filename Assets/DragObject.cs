@@ -26,8 +26,8 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         image = GetComponent<Image>();
         CodeEditor = GameObject.FindGameObjectsWithTag("Editor")[0].GetComponent<RectTransform>();
         CodeStorage = transform.parent;
-        
-        
+
+        // ChildCountWatcher.OnSmallerChildCount += HandleSmallerChildCount();
     }
 
     private void FixedUpdate()
@@ -36,10 +36,15 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
         if (Physics.CheckSphere(transform.position, range))
         {
-            Debug.Log("in range");
+            //Debug.Log("in range");
         }
     }
 
+    // private void HandleSmallerChildCount()
+    // {
+    //     parentOfDraggingObject = CodeEditor;
+    // }
+    
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
@@ -52,11 +57,11 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         parentOfDraggingObject = transform.parent;
 
         //check if this code block is in an expandable block of code
-        if (draggingObject.parent.CompareTag("ExpandableCodeBlock"))
-        {
-            ExpandableDragObject parent = draggingObject.GetComponentInParent<ExpandableDragObject>();
-            parent.Unexpand();
-        }
+        // if (draggingObject.parent.CompareTag("ExpandableCodeBlock"))
+        // {
+        //     ExpandableDragObject parent = draggingObject.GetComponentInParent<ExpandableDragObject>();
+        //     parent.Unexpand();
+        // }
         
         //Keep UI Element in front
         transform.SetParent(transform.root); //set parent to transform of the topmost object in hierarcy
@@ -76,21 +81,23 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     {
         //draggingObject.pivot = new Vector2(0.5f, 1f);
   
-        if (rectFullyOverlaps(draggingObject, CodeEditor) && !CodeBlockOverlap())
+        if (rectFullyOverlaps(draggingObject, CodeEditor) && !ExpandableBlockOverlap())
         {
-            transform.SetParent(CodeEditor.transform);
+            parentOfDraggingObject = CodeEditor;
+            //transform.SetParent(CodeEditor.transform);
         }
-        else if (inRange|| rectFullyOverlaps(draggingObject, CodeEditor) && CodeBlockOverlap())
+        else if (!rectFullyOverlaps(draggingObject, CodeEditor) && !ExpandableBlockOverlap())
         {
-            transform.SetParent(parentOfDraggingObject);
-        }
-        //else if(rectOverlaps(draggingObject,eventData.pointerCurrentRaycast))
-        else
-        {
-            //parentOfDraggingObject = CodeStorage;
+            parentOfDraggingObject = CodeStorage;
             //draggingObject.pa = CodeStorage.transform;
-            transform.SetParent(CodeStorage); //revert to initial hierarc
+            //transform.SetParent(CodeStorage); //revert to initial hierarc
         }
+        
+        
+        //else if(rectOverlaps(draggingObject,eventData.pointerCurrentRaycast))
+            transform.SetParent(parentOfDraggingObject);
+            
+        
 
         image.raycastTarget = true;
     }
@@ -154,13 +161,13 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     //     }
 
     //Check if any code block overlaps with this code block
-    bool CodeBlockOverlap()
+    bool ExpandableBlockOverlap()
     { 
         
         foreach (Transform block in CodeEditor.transform)
         {
             Debug.Log(CodeEditor.transform.childCount);
-            if (rectOverlaps(draggingObject, block as RectTransform))
+            if (block.CompareTag("ExpandableCodeBlock") && rectOverlaps(draggingObject, block as RectTransform))
                 return true;
         }
 
