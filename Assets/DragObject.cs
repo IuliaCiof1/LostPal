@@ -24,7 +24,7 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     {
         draggingObject = GetComponent<RectTransform>();
         image = GetComponent<Image>();
-        CodeEditor = GameObject.FindGameObjectsWithTag("Editor")[0].GetComponent<RectTransform>();
+        CodeEditor = GameObject.FindGameObjectsWithTag("CodeEditor")[0].GetComponent<RectTransform>();
         CodeStorage = transform.parent;
 
         // ChildCountWatcher.OnSmallerChildCount += HandleSmallerChildCount();
@@ -62,6 +62,12 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         //     ExpandableDragObject parent = draggingObject.GetComponentInParent<ExpandableDragObject>();
         //     parent.Unexpand();
         // }
+
+        //If this block was contained in an Expandable block then unexpand the Expandable block
+        if (transform.parent.parent.CompareTag("ExpandableCodeBlock"))
+        {
+            transform.parent.parent.GetComponent<ExpandableDragObject>().Unexpand();
+        }
         
         //Keep UI Element in front
         transform.SetParent(transform.root); //set parent to transform of the topmost object in hierarcy
@@ -70,11 +76,9 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
     public void OnDrag(PointerEventData eventData)
     {
-       
-        
         draggingObject.position = Input.mousePosition;  //copy mouse position to object position
         image.raycastTarget = false;
-
+        
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -89,8 +93,22 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         else if (!rectFullyOverlaps(draggingObject, CodeEditor) && !ExpandableBlockOverlap())
         {
             parentOfDraggingObject = CodeStorage;
+
+            //when the expandable block returns to CodeStorage, unparent all the contained blocks from this expandable block
+            if (CompareTag("ExpandableCodeBlock"))
+            {
+                Transform sp = transform.Find("SnapPoint");
+                
+                for(int i = sp.childCount-1; i>=0; i-- )
+                {
+                    gameObject.GetComponent<ExpandableDragObject>().Unexpand();
+                    sp.GetChild(i).transform.SetParent(CodeStorage);
+                    Debug.Log("alalss");
+                    
+                }
+            }
             //draggingObject.pa = CodeStorage.transform;
-            //transform.SetParent(CodeStorage); //revert to initial hierarc
+            //transform.SetParent(CodeStorage); //revert to initial hierarcy
         }
         
         
