@@ -13,7 +13,9 @@ public class PlayerController : MonoBehaviour
     public Vector2 TargetPosition { get; set; }
 
     private bool moveN, moveS, moveEW;
-    
+
+    //[SerializeField] private GameObject finishPanel;
+    public bool IsWin { get; set; }
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
@@ -64,7 +66,7 @@ public class PlayerController : MonoBehaviour
                 moveS = true;
             }
 
-
+            
             Vector3 newPosition = Vector3.MoveTowards(playerRb.position, TargetPosition, speed * Time.deltaTime); 
             playerRb.MovePosition(newPosition);
 
@@ -79,9 +81,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        throw new NotImplementedException();
+        Debug.Log("dfsf");
+        if (col.CompareTag("Finish"))
+        {
+            //finishPanel.SetActive(true);
+            IsWin = true;
+        }
     }
+    
 }

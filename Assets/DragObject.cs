@@ -16,10 +16,12 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     private RectTransform CodeEditor;
     private Transform CodeStorage;
 
-    private Vector3[] edgePoints;
+    //private Vector3[] edgePoints;
     public int range;
 
-    private bool inRange;
+    //private bool inRange;
+
+    [SerializeField] private RectTransform expandableBlock;
     private void Awake()
     {
         draggingObject = GetComponent<RectTransform>();
@@ -80,7 +82,9 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         image.raycastTarget = false;
         
     }
-
+    
+    
+    //A block will be parented to CodeStorage if it doesn't fully overlap with the CodeEditor, otherwise, it will be parented to CodeStorage
     public void OnEndDrag(PointerEventData eventData)
     {
         //draggingObject.pivot = new Vector2(0.5f, 1f);
@@ -90,7 +94,7 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
             parentOfDraggingObject = CodeEditor;
             //transform.SetParent(CodeEditor.transform);
         }
-        else if (!rectFullyOverlaps(draggingObject, CodeEditor) && !ExpandableBlockOverlap())
+        else if (!rectFullyOverlaps(draggingObject, CodeEditor))
         {
             parentOfDraggingObject = CodeStorage;
 
@@ -110,7 +114,16 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
             //draggingObject.pa = CodeStorage.transform;
             //transform.SetParent(CodeStorage); //revert to initial hierarcy
         }
-        
+
+        if (ExpandableBlockOverlap())
+        {
+            
+                expandableBlock.GetComponent<ExpandableDragObject>().Expand(draggingObject);
+                RectTransform snapPoint = expandableBlock.transform.Find("SnapPoint") as RectTransform;
+                parentOfDraggingObject = snapPoint.transform; //snap the dropped object on this object
+
+            
+        }
         
         //else if(rectOverlaps(draggingObject,eventData.pointerCurrentRaycast))
             transform.SetParent(parentOfDraggingObject);
@@ -186,7 +199,10 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         {
             Debug.Log(CodeEditor.transform.childCount);
             if (block.CompareTag("ExpandableCodeBlock") && rectOverlaps(draggingObject, block as RectTransform))
+            {
+                expandableBlock = block.GetComponent<RectTransform>();
                 return true;
+            }
         }
 
         return false;
