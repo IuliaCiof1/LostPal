@@ -26,14 +26,19 @@ public class RunCode : MonoBehaviour
     [SerializeField] private PlayerController player;
 
     private Button button;
+
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip clip;
     private void Start()
     {
         //PlayerWinWatcher.onPlayerWin += HandlePlayerWin;
         button = GetComponent<Button>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void Run()
     {
+        audioSource.PlayOneShot(clip);
         //get the blocks inside the "Player" block that's inside the CodeEditor
         //only those blocks will be executed
         if (playerBlock.IsChildOf(CodeEditor))
@@ -66,7 +71,10 @@ public class RunCode : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            player.RestartPosition();
+            button.enabled = true;
+
         }
     }
 

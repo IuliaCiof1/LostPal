@@ -19,6 +19,9 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     //private Vector3[] edgePoints;
     public int range;
 
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip dragClip;
+    [SerializeField] private AudioClip inBlockClip;
     //private bool inRange;
 
     [SerializeField] private RectTransform expandableBlock;
@@ -29,6 +32,7 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         CodeEditor = GameObject.FindGameObjectsWithTag("CodeEditor")[0].GetComponent<RectTransform>();
         CodeStorage = transform.parent;
 
+        audioSource = GetComponent<AudioSource>();
         // ChildCountWatcher.OnSmallerChildCount += HandleSmallerChildCount();
     }
 
@@ -56,6 +60,7 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     //Events from UnityEngine.EventSystems
     public void OnBeginDrag(PointerEventData eventData)
     {
+        audioSource.PlayOneShot(dragClip);
         parentOfDraggingObject = transform.parent;
 
         //check if this code block is in an expandable block of code
@@ -78,6 +83,7 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
     public void OnDrag(PointerEventData eventData)
     {
+        
         draggingObject.position = Input.mousePosition;  //copy mouse position to object position
         image.raycastTarget = false;
         
@@ -91,11 +97,13 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
   
         if (rectFullyOverlaps(draggingObject, CodeEditor) && !ExpandableBlockOverlap())
         {
+            audioSource.PlayOneShot(dragClip);
             parentOfDraggingObject = CodeEditor;
             //transform.SetParent(CodeEditor.transform);
         }
         else if (!rectFullyOverlaps(draggingObject, CodeEditor))
         {
+            audioSource.PlayOneShot(dragClip);
             parentOfDraggingObject = CodeStorage;
 
             //when the expandable block returns to CodeStorage, unparent all the contained blocks from this expandable block
@@ -117,10 +125,11 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
         if (ExpandableBlockOverlap())
         {
+            audioSource.PlayOneShot(inBlockClip);
             
-                expandableBlock.GetComponent<ExpandableDragObject>().Expand(draggingObject);
-                RectTransform snapPoint = expandableBlock.transform.Find("SnapPoint") as RectTransform;
-                parentOfDraggingObject = snapPoint.transform; //snap the dropped object on this object
+            expandableBlock.GetComponent<ExpandableDragObject>().Expand(draggingObject);
+            RectTransform snapPoint = expandableBlock.transform.Find("SnapPoint") as RectTransform;
+            parentOfDraggingObject = snapPoint.transform; //snap the dropped object on this object
 
             
         }

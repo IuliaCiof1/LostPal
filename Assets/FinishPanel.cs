@@ -14,9 +14,9 @@ public class FinishPanel : MonoBehaviour
 
     [SerializeField] private GameObject menu;
 
-    [SerializeField] private AudioClip runButtonSound;
+    //[SerializeField] private AudioClip runButtonSound;
     [SerializeField] private AudioClip buttonSound;
-    [SerializeField] private AudioClip blockSound;
+    //[SerializeField] private AudioClip blockSound;
     private AudioSource audioSource;
 
     private void Start()
@@ -66,8 +66,8 @@ public class FinishPanel : MonoBehaviour
         Application.Quit();
     }
     
-    public void runButtonClick()
+    public void ButtonClick()
     {
-        audioSource.PlayOneShot(runButtonSound);
+        audioSource.PlayOneShot(buttonSound);
     }
 }

@@ -16,9 +16,12 @@ public class PlayerController : MonoBehaviour
 
     //[SerializeField] private GameObject finishPanel;
     public bool IsWin { get; set; }
+
+    private Vector2 startPosition;
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
+        startPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -90,5 +93,9 @@ public class PlayerController : MonoBehaviour
             IsWin = true;
         }
     }
-    
+
+    public void RestartPosition()
+    {
+        transform.position = startPosition;
+    }
 }
