@@ -8,6 +8,8 @@ TagManager:
   - Editor
   - CodeBlock
   - ExpandableCodeBlock
+  - CodeStorage
+  - CodeEditor
   layers:
   - Default
   - TransparentFX
@@ -42,6 +44,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Ground
+    uniqueID: 3782716637
+    locked: 0
+  - name: VisualGrid
+    uniqueID: 2348497287
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

@@ -12,9 +12,16 @@ public class FinishPanel : MonoBehaviour
 
     private float time=0.0f;
 
+    [SerializeField] private GameObject menu;
+
+    [SerializeField] private AudioClip runButtonSound;
+    [SerializeField] private AudioClip buttonSound;
+    [SerializeField] private AudioClip blockSound;
+    private AudioSource audioSource;
+
     private void Start()
     {
-     //   Grid grid = new Grid(1000, 1000, 5);
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -29,5 +36,38 @@ public class FinishPanel : MonoBehaviour
     public void Retry()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void Menu()
+    {
+        menu.SetActive(true);
+        Time.timeScale = 0;
+        
+    }
+
+    public void Resume()
+    {
+        Time.timeScale = 1;
+        menu.SetActive(false);
+    }
+
+    public void MainMenu()
+    {
+        
+    }
+    
+    public void Settings()
+    {
+        
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+    
+    public void runButtonClick()
+    {
+        audioSource.PlayOneShot(runButtonSound);
     }
 }

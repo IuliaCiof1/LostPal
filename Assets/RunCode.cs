@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 public class RunCode : MonoBehaviour
 {
     [SerializeField]
@@ -22,9 +24,12 @@ public class RunCode : MonoBehaviour
     [SerializeField] private GameObject finishPanel;
     [SerializeField] private GameObject failPanel;
     [SerializeField] private PlayerController player;
+
+    private Button button;
     private void Start()
     {
         //PlayerWinWatcher.onPlayerWin += HandlePlayerWin;
+        button = GetComponent<Button>();
     }
 
     public void Run()
@@ -44,8 +49,10 @@ public class RunCode : MonoBehaviour
     //Caroutine is needed since for loops moves faster than the frames
     public IEnumerator CoroutineWaitForSeconds()
     {
+        
         for (int i = 0; i < SnapPoint.childCount; i++)
         {
+            button.enabled = false;
             block = SnapPoint.GetChild(i);
                 
             //Activates the child of the executable block 
