@@ -14,7 +14,7 @@ public class playerMoveW : MonoBehaviour
         Debug.Log("move w");
         
         player.GetComponent<PlayerController>().Move = true;
-        player.GetComponent<PlayerController>().TargetPosition = player.transform.position + new Vector3(-0.64f, 0,0);
+        player.GetComponent<PlayerController>().TargetPosition = player.transform.position + new Vector3(-0.66f, 0,0);
         gameObject.SetActive(false);
     }
 }

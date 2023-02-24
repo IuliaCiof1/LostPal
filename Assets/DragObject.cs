@@ -33,6 +33,7 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         CodeStorage = transform.parent;
 
         audioSource = GetComponent<AudioSource>();
+        
         // ChildCountWatcher.OnSmallerChildCount += HandleSmallerChildCount();
     }
 

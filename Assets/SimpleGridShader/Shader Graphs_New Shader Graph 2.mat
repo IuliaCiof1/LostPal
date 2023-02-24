@@ -50,7 +50,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _ColumnsRows: {r: 14, g: 14, b: 0, a: 0}
+    - _ColumnsRows: {r: 17, g: 17, b: 0, a: 0}
     - _GridScale: {r: 0.99, g: 0.99, b: 0, a: 0}
     - _Tilling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []

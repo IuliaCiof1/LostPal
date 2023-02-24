@@ -72,8 +72,8 @@ public class ExpandableDragObject : MonoBehaviour
         gameObject.GetComponent<RectTransform>().pivot = new Vector2(0.5f, 1f);
 
         middle.sizeDelta = new Vector2(middle.sizeDelta.x, middle.sizeDelta.y + addHeight);
-        bottom.position = new Vector2(bottom.position.x, bottom.position.y - addHeight);
-        //bottom.localPosition = new Vector2(bottom.localPosition.x, bottom.localPosition.y - addHeight);
+        //bottom.position = new Vector2(bottom.position.x, bottom.position.y - addHeight);
+        bottom.localPosition = new Vector2(bottom.localPosition.x, bottom.localPosition.y - addHeight);
 
         //rt.sizeDelta = new Vector2(snapPoint.sizeDelta.x, snapPoint.sizeDelta.y + addHeight - snapPoint.sizeDelta.y);
         snapPoint.sizeDelta = new Vector2(snapPoint.sizeDelta.x, snapPoint.sizeDelta.y + addHeight);

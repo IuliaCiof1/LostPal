@@ -13,7 +13,10 @@ public class FinishPanel : MonoBehaviour
     private float time=0.0f;
 
     [SerializeField] private GameObject menu;
-
+    [SerializeField] private GameObject settings;
+    [SerializeField] private GameObject sound;
+    [SerializeField] private GameObject graphics;
+    
     //[SerializeField] private AudioClip runButtonSound;
     [SerializeField] private AudioClip buttonSound;
     //[SerializeField] private AudioClip blockSound;
@@ -58,9 +61,39 @@ public class FinishPanel : MonoBehaviour
     
     public void Settings()
     {
-        
+        menu.SetActive(false);
+        settings.SetActive(true);
+        Debug.Log("setting is true");
     }
 
+    public void SettingsBack()
+    {
+        menu.SetActive(true);
+        settings.SetActive(false);
+    }
+
+    public void Sound()
+    {
+        settings.SetActive(false);
+        sound.SetActive(true);
+    }
+    
+    public void SoundBack()
+    {
+        settings.SetActive(true);
+        sound.SetActive(false);
+    }
+    
+    public void Graphics()
+    {
+        settings.SetActive(false);
+        graphics.SetActive(true);
+    }
+    public void GraphicsBack()
+    {
+        settings.SetActive(true);
+        graphics.SetActive(false);
+    }
     public void Quit()
     {
         Application.Quit();
@@ -70,4 +103,5 @@ public class FinishPanel : MonoBehaviour
     {
         audioSource.PlayOneShot(buttonSound);
     }
+    
 }

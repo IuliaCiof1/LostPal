@@ -14,6 +14,7 @@ public class BackgroundMusic : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = loopClip;
         audioSource.Play();
+        audioSource.loop = true;
     }
 
     private void OnEnable()
@@ -30,7 +31,7 @@ public class BackgroundMusic : MonoBehaviour
     {
         audioSource.clip = endingClip;
         audioSource.Play();
-        
+        audioSource.loop = false;
         EventManager.OnPlayerWins -= TriggerEnding;
     }
     
