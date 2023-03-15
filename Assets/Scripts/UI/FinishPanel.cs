@@ -10,16 +10,14 @@ public class FinishPanel : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI timeText;
 
-    private float time=0.0f;
+    private float time;
 
     [SerializeField] private GameObject menu;
     [SerializeField] private GameObject settings;
     [SerializeField] private GameObject sound;
     [SerializeField] private GameObject graphics;
     
-    //[SerializeField] private AudioClip runButtonSound;
     [SerializeField] private AudioClip buttonSound;
-    //[SerializeField] private AudioClip blockSound;
     private AudioSource audioSource;
 
     private void Start()
@@ -29,6 +27,7 @@ public class FinishPanel : MonoBehaviour
 
     void Update()
     {
+        //calculate time until player gets to finish
         if (!timeText.IsActive())
         {
             time += Time.deltaTime;
@@ -89,6 +88,7 @@ public class FinishPanel : MonoBehaviour
         settings.SetActive(false);
         graphics.SetActive(true);
     }
+    
     public void GraphicsBack()
     {
         settings.SetActive(true);

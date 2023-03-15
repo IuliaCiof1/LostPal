@@ -14,7 +14,7 @@ public class SwitchToggle : MonoBehaviour
         Toggle toggle = GetComponent<Toggle>();
         toggle.onValueChanged.AddListener(OnSwitch);
 
-        handlePositon = handleRt.localPosition;
+        handlePositon = -handleRt.localPosition;
     }
 
     void OnSwitch(bool on)
