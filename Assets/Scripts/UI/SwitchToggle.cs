@@ -1,31 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SwitchToggle : MonoBehaviour
+namespace UI
 {
-    [SerializeField] private RectTransform handleRt;
-
-    private Vector2 handlePositon;
-    // Update is called once per frame
-    void Awake()
+    public class SwitchToggle : MonoBehaviour
     {
-        Toggle toggle = GetComponent<Toggle>();
-        toggle.onValueChanged.AddListener(OnSwitch);
+        [SerializeField] private RectTransform handleRt;
 
-        handlePositon = -handleRt.localPosition;
-    }
-
-    void OnSwitch(bool on)
-    {
-        if (on)
+        private Vector2 handlePositon;
+        // Update is called once per frame
+        void Awake()
         {
-            handleRt.localPosition = handlePositon * -1;
+            Toggle toggle = GetComponent<Toggle>();
+            toggle.onValueChanged.AddListener(OnSwitch);
+
+            handlePositon = -handleRt.localPosition;
         }
-        else
+
+        void OnSwitch(bool on)
         {
-            handleRt.localPosition = handlePositon;
+            if (on)
+            {
+                handleRt.localPosition = handlePositon * -1;
+            }
+            else
+            {
+                handleRt.localPosition = handlePositon;
+            }
         }
     }
 }

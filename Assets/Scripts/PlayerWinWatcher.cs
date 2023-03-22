@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class PlayerWinWatcher : MonoBehaviour
 {
-    public delegate void OnPlayerWin(bool isWin);
+    //public delegate void OnPlayerWin(bool isWin);
 
-    public static event OnPlayerWin onPlayerWin;
+    //public static event OnPlayerWin onPlayerWin;
     // Start is called before the first frame update
     void Start()
     {

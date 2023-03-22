@@ -21,7 +21,7 @@ public class Dialog : MonoBehaviour, IPointerClickHandler
     {
         textBox.text = string.Empty;
         index = 0;
-        //NextLine();
+ 
         imageBox.sprite = characterImages[index];
         StartCoroutine(TypeLine());
     }
@@ -42,12 +42,6 @@ public class Dialog : MonoBehaviour, IPointerClickHandler
             
     }
 
-    // void StartDialogue()
-    // {
-    //     index = 0;
-    //     StartCoroutine(TypeLine());
-    // }
-
     IEnumerator TypeLine()
     {
         foreach (char c in lines[index].ToCharArray())
@@ -59,7 +53,6 @@ public class Dialog : MonoBehaviour, IPointerClickHandler
 
     void NextLine()
     {
-        
         if (index < lines.Length - 1)
         {
             index++;

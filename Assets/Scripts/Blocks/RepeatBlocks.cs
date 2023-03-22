@@ -1,47 +1,59 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class RepeatBlocks : MonoBehaviour
+namespace Blocks
 {
-    [SerializeField] private TMP_InputField inputNumber;
-    [SerializeField] private float secondsToWait;
-    [SerializeField] private Animator anim;
-    public void OnEnable()
+    public class RepeatBlocks : MonoBehaviour
     {
-        StartCoroutine(Repeat());
-    }
-
-    IEnumerator Repeat()
-    {
-        Transform SnapPoint = transform.parent.Find("SnapPoint");
-
-        int i;
+        [SerializeField] private TMP_InputField inputNumber; //number of iterations
+        [SerializeField] private float secondsToWait;
+        private Transform SnapPoint;
+        private bool fail;
         
-        for (i = 0; i < int.Parse(inputNumber.text); i++)
+        public void OnEnable()
         {
-            for (int j = 0; j < SnapPoint.childCount; j++)
-            {
-                Transform block = SnapPoint.GetChild(j);
-              
-                block.GetChild(0).gameObject.SetActive(true);
-
-                yield return new WaitUntil(()=>!block.GetChild(0).gameObject.activeSelf); //wait until the gameobject on the block is disabled. Needed for repeat blocks
-                yield return new WaitForSeconds(secondsToWait); //wait until animation ends
-                //yield return new WaitForSeconds(secondsToWait); //wait to finish animation
-            }
-            //yield return new WaitForSeconds(secondsToWait);
+            SnapPoint = transform.parent.Find("SnapPoint");
+            PlayerController.OnPlayerFails += PlayerFailsHandler;
+            fail = false;
+            StartCoroutine(Repeat());
         }
 
-        if (i == int.Parse(inputNumber.text))
+        IEnumerator Repeat()
         {
+            int i;
+            for (i = 0; i < int.Parse(inputNumber.text); i++)
+                {
+                    for (int j = 0; j < SnapPoint.childCount; j++)
+                    {
+                        if (fail)
+                            break;
+
+                        Transform block = SnapPoint.GetChild(j);
+
+                        block.GetChild(0).gameObject.SetActive(true);
+
+                        yield return
+                            new WaitUntil(() =>
+                                !block.GetChild(0).gameObject
+                                    .activeSelf); //wait until the gameobject on the block is disabled. Needed for repeat blocks
+                        yield return new WaitForSeconds(secondsToWait); //wait until animation ends
+                    }
+                }
+
+                if (i == int.Parse(inputNumber.text))
+                {
+                    gameObject.SetActive(false);
+                }
+            
+        }
+        void PlayerFailsHandler()
+        {
+            fail = true;
+            StopAllCoroutines();
             gameObject.SetActive(false);
         }
-
     }
-    
     
 }

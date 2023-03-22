@@ -9,6 +9,7 @@ public class GraphicsMaster : MonoBehaviour
 {
     [SerializeField] private Toggle fullscreenTog;
     [SerializeField] private TMP_Dropdown resDropDown;
+    [SerializeField] private Camera camera;
     
     void Start()
     {
@@ -20,9 +21,6 @@ public class GraphicsMaster : MonoBehaviour
         for (int i = 0; i < Screen.resolutions.Length; i++)
         {
             resolutions.Add(Screen.resolutions[i].width + " X " + Screen.resolutions[i].height);
-
-            if (Screen.resolutions[i].width == Screen.width && Screen.resolutions[i].height == Screen.height)
-                currentResIndex = i;
         }
         
         resDropDown.ClearOptions();
@@ -30,7 +28,7 @@ public class GraphicsMaster : MonoBehaviour
         
         //select current resolution in dropdown
         string currentRes = Screen.width + " X " + Screen.height;
-        resDropDown.options[currentResIndex].text = currentRes;
+        resDropDown.options[0].text = currentRes;
         resDropDown.transform.GetComponentInChildren<TextMeshProUGUI>().text = currentRes;
 
     }
@@ -41,5 +39,7 @@ public class GraphicsMaster : MonoBehaviour
         string [] res = resDropDown.options[resDropDown.value].text.Split(" X ");
         
         Screen.SetResolution(Int32.Parse(res[0]), Int32.Parse(res[1]), fullscreenTog.isOn);
+        
+        Camera.main.GetComponent<CameraScale>().UpdateCameraSize(Int32.Parse(res[0]), Int32.Parse(res[1]));
     }
 }
