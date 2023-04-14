@@ -41,6 +41,11 @@ namespace UI
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
+        public void Next()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        
         public void Menu()
         {
             menu.SetActive(true);
@@ -50,7 +55,7 @@ namespace UI
 
         public void Play()
         {
-            SceneManager.LoadScene("Level1");
+            SceneManager.LoadScene("Intro");
         }
     
     
@@ -62,6 +67,7 @@ namespace UI
 
         public void MainMenu()
         {
+            Time.timeScale = 1;
             SceneManager.LoadScene("MainMenu");
         }
     

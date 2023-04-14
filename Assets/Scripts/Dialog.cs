@@ -26,7 +26,6 @@ public class Dialog : MonoBehaviour, IPointerClickHandler
         StartCoroutine(TypeLine());
     }
 
-    // Update is called once per frame
     public void OnPointerClick(PointerEventData eventData)
     {
         if (textBox.text == lines[index])
