@@ -12,7 +12,7 @@ namespace UI
 
         private float time;
 
-        [SerializeField] private GameObject play;
+        [SerializeField] private GameObject lvlSelection;
         [SerializeField] private GameObject menu;
         [SerializeField] private GameObject settings;
         [SerializeField] private GameObject sound;
@@ -55,7 +55,9 @@ namespace UI
 
         public void Play()
         {
-            SceneManager.LoadScene("Intro");
+            //SceneManager.LoadScene("Intro");
+            menu.SetActive(false);
+            lvlSelection.SetActive(true);
         }
     
     
@@ -71,6 +73,12 @@ namespace UI
             SceneManager.LoadScene("MainMenu");
         }
     
+        public void PlayBack()
+        {
+            menu.SetActive(true);
+            lvlSelection.SetActive(false);
+        }
+        
         public void Settings()
         {
             menu.SetActive(false);

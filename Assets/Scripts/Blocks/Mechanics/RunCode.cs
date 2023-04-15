@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Blocks.Mechanics
@@ -78,6 +79,7 @@ namespace Blocks.Mechanics
 
         void PlayerWinHandle()
         {
+            PlayerPrefs.SetInt("levelAt",SceneManager.GetActiveScene().buildIndex+1); //save progress
             runBtnComponent.enabled = false;
             finishPanel.SetActive(true);
         }
