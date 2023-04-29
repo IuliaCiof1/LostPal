@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace UI
 {
-    public class FinishPanel : MonoBehaviour
+    public class MenuPanelsManager : MonoBehaviour
     {
         [SerializeField]
         private TextMeshProUGUI timeText;
@@ -17,14 +17,6 @@ namespace UI
         [SerializeField] private GameObject settings;
         [SerializeField] private GameObject sound;
         [SerializeField] private GameObject graphics;
-    
-        [SerializeField] private AudioClip buttonSound;
-        private AudioSource audioSource;
-
-        private void Start()
-        {
-            audioSource = GetComponent<AudioSource>();
-        }
 
         void Update()
         {
@@ -118,11 +110,5 @@ namespace UI
         {
             Application.Quit();
         }
-    
-        public void ButtonClick()
-        {
-            audioSource.PlayOneShot(buttonSound);
-        }
-    
     }
 }

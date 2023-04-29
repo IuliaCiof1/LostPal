@@ -75,6 +75,8 @@ namespace Blocks.Mechanics
         public void OnDisable()
         {
             PlayerController.OnPlayerWins -= PlayerWinHandle;
+            PlayerController.OnPlayerFails -= PlayerFailsHandler;
+
         }
 
         void PlayerWinHandle()

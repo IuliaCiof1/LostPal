@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
              //If player moves to the right
              if (TargetPosition.y == transform.position.y && TargetPosition.x > transform.position.x)
              {
-                 transform.localScale = new Vector2(-1, 1);
+                 transform.localScale = new Vector2(-Math.Abs(transform.localScale.x),transform.localScale.y);
                  moveEW = true;
                  moveN = false;
                  moveS = false;
@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
              //If player moves to the left
              else if (TargetPosition.y == transform.position.y && TargetPosition.x < transform.position.x)
              {
-                 transform.localScale = new Vector2(1, 1);
+                 transform.localScale = new Vector2(Math.Abs(transform.localScale.x),transform.localScale.y);
                  moveEW = true;
                  moveN = false;
                  moveS = false;
