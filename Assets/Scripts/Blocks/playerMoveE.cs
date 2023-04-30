@@ -12,7 +12,7 @@ namespace Blocks
         public void OnEnable() 
         {
             player.GetComponent<PlayerController>().Move = true;
-            player.GetComponent<PlayerController>().TargetPosition = player.transform.position + new Vector3(0.66f, 0,0);
+            player.GetComponent<PlayerController>().TargetPosition = player.transform.position + new Vector3(0.33f, 0,0);
         
             gameObject.SetActive(false);
         }

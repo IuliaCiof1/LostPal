@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,19 +21,26 @@ public class PlayerController : MonoBehaviour
     public delegate void PlayerWins();
     public static event PlayerWins OnPlayerWins;
     
-    public delegate void PlayerFails();
     public static event PlayerWins OnPlayerFails;
+
+    public static event PlayerWins OnPlayeraBlockAhead;
 
     private AudioSource audioSource;
 
     private Vector2 startPosition;
     private Vector3 newPosition;
+
+    //private TilemapCollider2D[] objectTileColliders;
+    
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
         startPosition = transform.position;
 
         audioSource = GetComponent<AudioSource>();
+
+       // objectTileColliders = GameObject.FindObjectsOfType<TilemapCollider2D>();
+        //Collider2D[] objectColliders = GameObject.FindObjectsOfType<Collider2D>();
     }
 
     private void Update()
@@ -40,11 +48,35 @@ public class PlayerController : MonoBehaviour
         if(IsWin)
             OnPlayerWins?.Invoke();
     }
-    
+
+    public Tilemap tilemap;
+
+    public TileBase tilebase;
     // Update is called once per frame
     public void FixedUpdate()
     {
+        float offset = 0.66f;
+        float positionX = transform.position.x;
+        float positionY = transform.position.y;
+        float positionZ = transform.position.z;
         
+        Vector3[] tilePositions =
+        {
+            new Vector3(positionX, (positionY + offset), 0), new Vector3((positionX + offset), positionY,0 ), 
+            new Vector3(positionX, (positionY + offset), 0), new Vector3((positionX + offset), positionY, 0)
+        
+        };
+        
+        //Debug.Log(tilePositions);
+        //
+        for (int i = 0; i < tilePositions.Length; i++)
+         {
+             //Debug.Log("controller "+tilePositions[i]);
+             //tilemap.SetTile(tilemap.WorldToCell(tilePositions[i]), tilebase);
+             //Debug.Log(tilemap.WorldToCell(tilePositions[i]));
+             Debug.Log(tilemap.GetTile(tilemap.WorldToCell(tilePositions[i])));
+        }
+
         //Movement animation
          animator.SetBool("moveEW",moveEW);
          animator.SetBool("moveN",moveN);
@@ -53,6 +85,11 @@ public class PlayerController : MonoBehaviour
          if (Move)
          {
              audioSource.enabled = true;//PlayOneShot(audioClip);
+             // if (CheckIfBlockAhead())
+             // {
+             //     
+             // }
+             
              //If player moves to the right
              if (TargetPosition.y == transform.position.y && TargetPosition.x > transform.position.x)
              {
@@ -86,6 +123,7 @@ public class PlayerController : MonoBehaviour
                  moveN = false;
                  moveS = true;
              }
+             
 
              newPosition = Vector3.MoveTowards(playerRb.position, TargetPosition, speed * Time.deltaTime); 
              playerRb.MovePosition(newPosition);
@@ -96,14 +134,28 @@ public class PlayerController : MonoBehaviour
                  moveEW = false;
                  moveN = false;
                  moveS = false;
+                 GetComponent<BoxCollider2D>().enabled = true;
              }
          }
          else
          {
              audioSource.enabled = false;
          }
+         
         
     }
+
+    // public bool CheckIfBlockAhead()
+    // {
+    //     for (int i = 0; i < objectTileColliders.Length; i++)
+    //     {
+    //         if (Vector2.Distance(transform.position, objectTileColliders[i].transform.position) <= 0.66f)
+    //         {
+    //             return true;
+    //         }
+    //     }
+    // }
+    
 
     private void OnTriggerEnter2D(Collider2D col)
     {
