@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Blocks
 {
@@ -9,11 +10,16 @@ namespace Blocks
 
         //Whenever this object is enabled/activated it will send some new position coordonates to the PlayerController
         //It will also enable movement
+        private Outline outline;
         public void OnEnable() 
         {
+            // outline =  transform.parent.GetComponent<Outline>();
+            // outline.enabled = true;
+            
             player.GetComponent<PlayerController>().Move = true;
             player.GetComponent<PlayerController>().TargetPosition = player.transform.position + new Vector3(0.33f, 0,0);
-        
+
+            //outline.enabled = false;
             gameObject.SetActive(false);
         }
     

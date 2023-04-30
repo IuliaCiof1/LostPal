@@ -201,6 +201,7 @@ GameObject:
   - component: {fileID: 1341907759614560627}
   - component: {fileID: 1341907759614560637}
   - component: {fileID: 1341907759614560636}
+  - component: {fileID: -8309091925847229758}
   m_Layer: 6
   m_Name: MoveW
   m_TagString: CodeBlock
@@ -396,3 +397,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-8309091925847229758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341907759614560631}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.92156863, g: 0.88268995, b: 0.2995098, a: 0.7411765}
+  m_EffectDistance: {x: 1.75, y: -2.5}
+  m_UseGraphicAlpha: 0

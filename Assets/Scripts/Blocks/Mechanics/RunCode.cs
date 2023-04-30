@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -21,6 +22,8 @@ namespace Blocks.Mechanics
         private Button runBtnComponent;
 
         [SerializeField] private AudioClip errorSound;
+        private Transform block;
+        private Outline outline;
         
         private void Start()
         {
@@ -47,18 +50,22 @@ namespace Blocks.Mechanics
                 //Get every block inside the Player block and execute it
                 for (int i = 0; i < SnapPoint.childCount; i++)
                 {
-                    Debug.Log("run coroutine");
                     runBtnComponent.enabled = false;
-                    Transform block = SnapPoint.GetChild(i);
+                    block = SnapPoint.GetChild(i);
 
                     block.GetChild(0).gameObject.SetActive(true);
-
+                    
+                    //outline the block that is being executed
+                    outline =  block.GetComponent<Outline>();
+                    outline.enabled = true;
+                    
                     yield return
                         new WaitUntil(() =>
                             !block.GetChild(0).gameObject
                                 .activeSelf); //wait until the gameobject on the block is disabled. Needed for repeat blocks
                     yield return new WaitForSeconds(secondsToWait); //wait until animation ends
 
+                    outline.enabled = false;
                 }
 
                 player.RestartPosition();
@@ -90,6 +97,7 @@ namespace Blocks.Mechanics
         {
             AudioSource audioSource = GetComponent<AudioSource>();
             audioSource.PlayOneShot(errorSound);
+            outline.enabled = false;
             StopAllCoroutines();
             runBtnComponent.enabled = true;
         }

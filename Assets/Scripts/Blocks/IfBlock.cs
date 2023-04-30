@@ -20,9 +20,12 @@ namespace Blocks
         private bool fail;
 
         [SerializeField] private Tilemap tilemap;
+        private Outline outline;
         
         private void OnEnable()
         {
+            
+            
             snapPoint = transform.parent.Find("SnapPoint");
             PlayerController.OnPlayerFails += PlayerFailsHandler;
             
@@ -60,16 +63,20 @@ namespace Blocks
                             Transform block = snapPoint.GetChild(j);
 
                             block.GetChild(0).gameObject.SetActive(true);
-
+                            outline =  block.GetComponent<Outline>();
+                            outline.enabled = true;
+                            
                             yield return
                                 new WaitUntil(() =>
                                     !block.GetChild(0).gameObject
                                         .activeSelf); //wait until the gameobject on the block is disabled. Needed for repeat blocks
                             yield return new WaitForSeconds(secondsToWait); //wait until animation ends
+
+                            outline.enabled = false;
                         }
                     }
-
                     
+                    PlayerController.OnPlayerFails -= PlayerFailsHandler;
                     gameObject.SetActive(false);
                     break;
                 }
@@ -78,9 +85,17 @@ namespace Blocks
         
         void PlayerFailsHandler()
         {
+            outline.enabled = false;
             fail = true;
             StopAllCoroutines();
+            PlayerController.OnPlayerFails -= PlayerFailsHandler;
+
             gameObject.SetActive(false);
+        }
+        
+        public void OnDisable()
+        {
+            PlayerController.OnPlayerFails -= PlayerFailsHandler;
         }
     }
 }

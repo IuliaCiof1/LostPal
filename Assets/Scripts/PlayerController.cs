@@ -49,33 +49,32 @@ public class PlayerController : MonoBehaviour
             OnPlayerWins?.Invoke();
     }
 
-    public Tilemap tilemap;
-
-    public TileBase tilebase;
+    // public Tilemap tilemap;
+    //
+    // public TileBase tilebase;
     // Update is called once per frame
     public void FixedUpdate()
     {
-        float offset = 0.66f;
-        float positionX = transform.position.x;
-        float positionY = transform.position.y;
-        float positionZ = transform.position.z;
-        
-        Vector3[] tilePositions =
-        {
-            new Vector3(positionX, (positionY + offset), 0), new Vector3((positionX + offset), positionY,0 ), 
-            new Vector3(positionX, (positionY + offset), 0), new Vector3((positionX + offset), positionY, 0)
-        
-        };
-        
-        //Debug.Log(tilePositions);
+        // float offset = 0.66f;
+        // float positionX = transform.position.x;
+        // float positionY = transform.position.y;
         //
-        for (int i = 0; i < tilePositions.Length; i++)
-         {
-             //Debug.Log("controller "+tilePositions[i]);
-             //tilemap.SetTile(tilemap.WorldToCell(tilePositions[i]), tilebase);
-             //Debug.Log(tilemap.WorldToCell(tilePositions[i]));
-             Debug.Log(tilemap.GetTile(tilemap.WorldToCell(tilePositions[i])));
-        }
+        // Vector3[] tilePositions =
+        // {
+        //     new Vector3(positionX, (positionY + offset), 0), new Vector3((positionX + offset), positionY,0 ), 
+        //     new Vector3(positionX, (positionY + offset), 0), new Vector3((positionX + offset), positionY, 0)
+        //
+        // };
+        //
+        // //Debug.Log(tilePositions);
+        // //
+        // for (int i = 0; i < tilePositions.Length; i++)
+        //  {
+        //      //Debug.Log("controller "+tilePositions[i]);
+        //      //tilemap.SetTile(tilemap.WorldToCell(tilePositions[i]), tilebase);
+        //      //Debug.Log(tilemap.WorldToCell(tilePositions[i]));
+        //      Debug.Log(tilemap.GetTile(tilemap.WorldToCell(tilePositions[i])));
+        // }
 
         //Movement animation
          animator.SetBool("moveEW",moveEW);
