@@ -88,6 +88,7 @@ namespace Blocks.Mechanics
 
         void PlayerWinHandle()
         {
+            StopAllCoroutines();
             PlayerPrefs.SetInt("levelAt",SceneManager.GetActiveScene().buildIndex+1); //save progress
             runBtnComponent.enabled = false;
             finishPanel.SetActive(true);

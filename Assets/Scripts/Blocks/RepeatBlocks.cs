@@ -17,6 +17,7 @@ namespace Blocks
         {
             SnapPoint = transform.parent.Find("SnapPoint");
             PlayerController.OnPlayerFails += PlayerFailsHandler;
+            PlayerController.OnPlayerWins += PlayerWinsHandler;
             fail = false;
             // outline =  transform.parent.GetComponent<Outline>();
             // outline.enabled = true;
@@ -69,6 +70,17 @@ namespace Blocks
             PlayerController.OnPlayerFails -= PlayerFailsHandler;
             gameObject.SetActive(false);
         }
+        
+        void PlayerWinsHandler()
+        {
+            //outline.enabled = false;
+
+            fail = true;
+            StopAllCoroutines();
+            PlayerController.OnPlayerWins -= PlayerWinsHandler;
+            gameObject.SetActive(false);
+        }
+        
     }
     
 }

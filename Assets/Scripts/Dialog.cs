@@ -13,9 +13,13 @@ public class Dialog : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Sprite[] characterImages;
     [SerializeField] private Image imageBox;
     [SerializeField] private float textSpeed;
-
+    
     private int index;
 
+    public delegate void DialogFinish();
+
+    public static event DialogFinish OnDialogFinish;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -61,6 +65,7 @@ public class Dialog : MonoBehaviour, IPointerClickHandler
         }
         else
         {
+            OnDialogFinish?.Invoke();
             gameObject.SetActive(false);
         }
     }
