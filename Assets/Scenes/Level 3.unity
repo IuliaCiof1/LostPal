@@ -53146,7 +53146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6999960306909571141, guid: 25c7165fa52319f438c35a114ecad329, type: 3}
       propertyPath: m_Name
-      value: MoveN
+      value: MoN
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25c7165fa52319f438c35a114ecad329, type: 3}
@@ -53247,7 +53247,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7745168611314204623, guid: 3344326d40a5e5f44b25f1e7c46524f5, type: 3}
       propertyPath: m_Name
-      value: MoveS
+      value: MoS
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3344326d40a5e5f44b25f1e7c46524f5, type: 3}
@@ -53264,7 +53264,7 @@ PrefabInstance:
       objectReference: {fileID: 1435924878}
     - target: {fileID: 5704579299823372949, guid: 7f0ecb9cd1872ad4dbcc8850c941ddeb, type: 3}
       propertyPath: m_Name
-      value: MoveE
+      value: MoE
       objectReference: {fileID: 0}
     - target: {fileID: 5704579299823372954, guid: 7f0ecb9cd1872ad4dbcc8850c941ddeb, type: 3}
       propertyPath: m_Pivot.x
@@ -61641,7 +61641,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1341907759614560631, guid: 5c75532e3c875b649a09ec6bc52b832d, type: 3}
       propertyPath: m_Name
-      value: MoveW (1)
+      value: MoW (1)
       objectReference: {fileID: 0}
     - target: {fileID: 1341907759614560631, guid: 5c75532e3c875b649a09ec6bc52b832d, type: 3}
       propertyPath: m_IsActive

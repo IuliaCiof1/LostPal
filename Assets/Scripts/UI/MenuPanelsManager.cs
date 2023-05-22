@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
 
 namespace UI
@@ -25,6 +27,7 @@ namespace UI
             {
                 time += Time.deltaTime;
                 timeText.text = "Time: " + Math.Round(time,2) + " s";
+                
             }
         }
 

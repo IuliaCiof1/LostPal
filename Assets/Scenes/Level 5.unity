@@ -47957,7 +47957,7 @@ PrefabInstance:
       objectReference: {fileID: 1435924878}
     - target: {fileID: 5704579299823372949, guid: 7f0ecb9cd1872ad4dbcc8850c941ddeb, type: 3}
       propertyPath: m_Name
-      value: MoveE
+      value: MoE
       objectReference: {fileID: 0}
     - target: {fileID: 5704579299823372954, guid: 7f0ecb9cd1872ad4dbcc8850c941ddeb, type: 3}
       propertyPath: m_Pivot.x
@@ -48336,7 +48336,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1380768955916405698, guid: 426f42a00d98a0e479eae669941ee0a4, type: 3}
       propertyPath: m_Name
-      value: If
+      value: IfB
       objectReference: {fileID: 0}
     - target: {fileID: 1380768955962341225, guid: 426f42a00d98a0e479eae669941ee0a4, type: 3}
       propertyPath: player
