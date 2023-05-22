@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -24,7 +26,8 @@ namespace Blocks.Mechanics
         [SerializeField] private AudioClip errorSound;
         private Transform block;
         private Outline outline;
-        
+
+        private string hierarchyString;
         private void Start()
         {
             runBtnComponent = GetComponent<Button>();
@@ -92,7 +95,26 @@ namespace Blocks.Mechanics
             PlayerPrefs.SetInt("levelAt",SceneManager.GetActiveScene().buildIndex+1); //save progress
             runBtnComponent.enabled = false;
             finishPanel.SetActive(true);
+            
+            GetHierarcy a = new GetHierarcy();
+            
+            //Debug.Log(a.GetCodeEditorChildrenString(playerBlock, 0));
+
+            //Unity Analytics
+            AnalyticsResult analyticsResult =
+                Analytics.CustomEvent("BlocksCombination", new Dictionary<string, object>
+                {
+                    {"Level", SceneManager.GetActiveScene()},
+                    {"Combination", a.GetCodeEditorChildrenString(playerBlock, 0)},
+                    {"Time", Math.Round(Time.deltaTime,2)}
+                });
+            
+            Debug.Log(analyticsResult);
+            //Debug.Log(analyticsResult);
+            
+            PlayerController.OnPlayerWins -= PlayerWinHandle;
         }
+
 
         void PlayerFailsHandler()
         {

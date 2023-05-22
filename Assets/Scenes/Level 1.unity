@@ -6321,6 +6321,8 @@ MonoBehaviour:
   - Now that your player is all set, try to collect the coin by moving ...
   - ... the player using any action (blue) block and placing them inside the "Player"
     block.
+  - Remember, you can reset the level at anytime by pressing <sprite name="Retry">.
+  - You can pause the game by entering the main menu <sprite name="Menu-1">.
   - Now click the "Run" button and let the player do its job.
   characterImages:
   - {fileID: 638217776, guid: a8437c7927180e643a6408e84fa5a80f, type: 3}
@@ -6329,6 +6331,8 @@ MonoBehaviour:
   - {fileID: 614516385, guid: a8437c7927180e643a6408e84fa5a80f, type: 3}
   - {fileID: -937580332, guid: a8437c7927180e643a6408e84fa5a80f, type: 3}
   - {fileID: -937580332, guid: a8437c7927180e643a6408e84fa5a80f, type: 3}
+  - {fileID: 614516385, guid: a8437c7927180e643a6408e84fa5a80f, type: 3}
+  - {fileID: 614516385, guid: a8437c7927180e643a6408e84fa5a80f, type: 3}
   - {fileID: 614516385, guid: a8437c7927180e643a6408e84fa5a80f, type: 3}
   imageBox: {fileID: 1437405460}
   textSpeed: 0.05
@@ -6953,7 +6957,7 @@ PrefabInstance:
       objectReference: {fileID: 501113738}
     - target: {fileID: 5704579299823372949, guid: 7f0ecb9cd1872ad4dbcc8850c941ddeb, type: 3}
       propertyPath: m_Name
-      value: MoveE (1)
+      value: MoE (1)
       objectReference: {fileID: 0}
     - target: {fileID: 5704579299823372954, guid: 7f0ecb9cd1872ad4dbcc8850c941ddeb, type: 3}
       propertyPath: m_Pivot.x
@@ -9918,7 +9922,7 @@ MonoBehaviour:
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
+  m_spriteAsset: {fileID: 11400000, guid: 4005e23358046bb45ad39cd3db9eeaaa, type: 2}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
   m_TextStyleHashCode: -1183493901
@@ -11483,7 +11487,7 @@ MonoBehaviour:
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
+  m_spriteAsset: {fileID: 11400000, guid: 4005e23358046bb45ad39cd3db9eeaaa, type: 2}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
   m_TextStyleHashCode: -1183493901
@@ -13324,7 +13328,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1341907759614560631, guid: 5c75532e3c875b649a09ec6bc52b832d, type: 3}
       propertyPath: m_Name
-      value: MoveW
+      value: MoW
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c75532e3c875b649a09ec6bc52b832d, type: 3}
@@ -13731,7 +13735,7 @@ PrefabInstance:
       objectReference: {fileID: 501113738}
     - target: {fileID: 5704579299823372949, guid: 7f0ecb9cd1872ad4dbcc8850c941ddeb, type: 3}
       propertyPath: m_Name
-      value: MoveE
+      value: MoE
       objectReference: {fileID: 0}
     - target: {fileID: 5704579299823372954, guid: 7f0ecb9cd1872ad4dbcc8850c941ddeb, type: 3}
       propertyPath: m_Pivot.x
@@ -13916,7 +13920,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6999960306909571141, guid: 25c7165fa52319f438c35a114ecad329, type: 3}
       propertyPath: m_Name
-      value: MoveN
+      value: MoN
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25c7165fa52319f438c35a114ecad329, type: 3}
@@ -14017,7 +14021,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7745168611314204623, guid: 3344326d40a5e5f44b25f1e7c46524f5, type: 3}
       propertyPath: m_Name
-      value: MoveS
+      value: MoS
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3344326d40a5e5f44b25f1e7c46524f5, type: 3}
