@@ -47,10 +47,21 @@ public class Dialog : MonoBehaviour, IPointerClickHandler
 
     IEnumerator TypeLine()
     {
+        bool styling = false; //avoid printing styling tags to the text box
         foreach (char c in lines[index].ToCharArray())
         {
+            if (c == '<')
+                styling = true;
+            else if (c == '>')
+                styling = false;
+            
             textBox.text += c;
-            yield return new WaitForSeconds(textSpeed);
+            if(!styling)
+            {
+                //textBox.text += c;
+                yield return new WaitForSeconds(textSpeed);
+            }
+            
         }
     }
 

@@ -6315,15 +6315,20 @@ MonoBehaviour:
   textBox: {fileID: 1586404912}
   lines:
   - Let's start with the basics.
-  - See that yellow block called "Player" over there in the center?
-  - You will use that block to control the player.
+  - See that yellow block called <b><color=black>"Player"</color></b> over there
+    in the center?
+  - You will <b><color=black>use that block to control the player.</color></b>
   - Try to move it in the rectangle to the right.
-  - Now that your player is all set, try to collect the coin by moving ...
-  - ... the player using any action (blue) block and placing them inside the "Player"
-    block.
-  - Remember, you can reset the level at anytime by pressing <sprite name="Retry">.
-  - You can pause the game by entering the main menu <sprite name="Menu-1">.
-  - Now click the "Run" button and let the player do its job.
+  - Now that your player is all set, try to <b><color=black>collect the coin</color></b>
+    by moving ...
+  - ... the player using any <b><color=black>action (blue) block</color></b> and
+    placing them inside the "Player" block.
+  - Remember, you can <b><color=black>reset</color></b> the level at anytime by pressing
+    <sprite name="Retry">.
+  - You can <b><color=black>pause</color></b> the game by entering the main menu
+    <sprite name="Menu-1">.
+  - Now click the <b><color=black>"Run" </color></b>button and let the player do
+    its job.
   characterImages:
   - {fileID: 638217776, guid: a8437c7927180e643a6408e84fa5a80f, type: 3}
   - {fileID: -1331832926, guid: a8437c7927180e643a6408e84fa5a80f, type: 3}
@@ -6332,8 +6337,8 @@ MonoBehaviour:
   - {fileID: -937580332, guid: a8437c7927180e643a6408e84fa5a80f, type: 3}
   - {fileID: -937580332, guid: a8437c7927180e643a6408e84fa5a80f, type: 3}
   - {fileID: 614516385, guid: a8437c7927180e643a6408e84fa5a80f, type: 3}
-  - {fileID: 614516385, guid: a8437c7927180e643a6408e84fa5a80f, type: 3}
-  - {fileID: 614516385, guid: a8437c7927180e643a6408e84fa5a80f, type: 3}
+  - {fileID: -937580332, guid: a8437c7927180e643a6408e84fa5a80f, type: 3}
+  - {fileID: -1331832926, guid: a8437c7927180e643a6408e84fa5a80f, type: 3}
   imageBox: {fileID: 1437405460}
   textSpeed: 0.05
 --- !u!1 &1201965850

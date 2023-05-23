@@ -40289,12 +40289,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textBox: {fileID: 8377715984272228985}
   lines:
-  - Let's try the new "If" block.
-  - Use the dropdown to choose a condition.
+  - Let's try the new <b><color=black>"If"</color></b> block.
+  - Use the dropdown to <b><color=black>choose a condition.
   - In an If block the nested blocks will be executed only if the selected condition
     is met.
   - One more thing, sometimes the number of iterations of the Repeat block will be
-    locked.
+    <b><color=black>locked.
   - Therefore, you won't be able to modify it's value.
   characterImages:
   - {fileID: -1331832926, guid: a8437c7927180e643a6408e84fa5a80f, type: 3}

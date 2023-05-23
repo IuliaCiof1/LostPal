@@ -59,6 +59,7 @@ namespace Blocks
         public void OnDisable()
         {
             PlayerController.OnPlayerFails -= PlayerFailsHandler;
+            PlayerController.OnPlayerWins -= PlayerWinsHandler;
         }
         
         void PlayerFailsHandler()

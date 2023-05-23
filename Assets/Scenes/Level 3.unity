@@ -62677,11 +62677,11 @@ MonoBehaviour:
   lines:
   - Oh no! The coin is so far away...
   - You could place countless blocks that perform the same action or...
-  - You could place one "Repeat" block to iterate that action as many times as you'd
-    like without too much effort.
+  - You could place one <b><color=black>"Repeat" </color></b>block to <b><color=black>iterate
+    that action</b></color> as many times as you'd like without too much effort.
   - Try placing the "Repeat" block in the "Player" block.
   - Now place an action block inside it.
-  - Don't forget to write how many times that block iterates.
+  - Don't forget to <b><color=black>write how many times that block iterates.
   - Go! Go! Go!
   characterImages:
   - {fileID: 638217776, guid: a8437c7927180e643a6408e84fa5a80f, type: 3}
