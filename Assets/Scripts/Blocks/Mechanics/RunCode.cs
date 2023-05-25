@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Services.Analytics;
 using UnityEngine;
 using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
@@ -96,22 +97,18 @@ namespace Blocks.Mechanics
             runBtnComponent.enabled = false;
             finishPanel.SetActive(true);
             
-            GetHierarcy a = new GetHierarcy();
-            
-            //Debug.Log(a.GetCodeEditorChildrenString(playerBlock, 0));
+            // GetHierarcy a = new GetHierarcy();
+            //
+            // //Debug.Log(a.GetCodeEditorChildrenString(playerBlock, 0));
+            //
+            // //Unity Analytics
+            // AnalyticsService.Instance.CustomData("BlocksCombination", new Dictionary<string, object>
+            //     {
+            //         {"Level", SceneManager.GetActiveScene()},
+            //         {"Combination", a.GetCodeEditorChildrenString(playerBlock, 0)},
+            //         {"Time", Math.Round(Time.deltaTime,2)}
+            //     });
 
-            //Unity Analytics
-            AnalyticsResult analyticsResult =
-                Analytics.CustomEvent("BlocksCombination", new Dictionary<string, object>
-                {
-                    {"Level", SceneManager.GetActiveScene()},
-                    {"Combination", a.GetCodeEditorChildrenString(playerBlock, 0)},
-                    {"Time", Math.Round(Time.deltaTime,2)}
-                });
-            
-            Debug.Log(analyticsResult);
-            //Debug.Log(analyticsResult);
-            
             PlayerController.OnPlayerWins -= PlayerWinHandle;
         }
 
