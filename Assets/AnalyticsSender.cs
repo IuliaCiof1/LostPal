@@ -6,6 +6,7 @@ using Unity.Services.Core;
 using UnityEngine;
 using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
+using Events = UnityEditor.PackageManager.Events;
 
 public class AnalyticsSender : MonoBehaviour
 {
@@ -50,13 +51,14 @@ public class AnalyticsSender : MonoBehaviour
         
         //CustomEventManager.
         
-        AnalyticsEvent.Custom("BlocksCombination", new Dictionary<string, object>
-        {
-            {"Level", SceneManager.GetActiveScene().buildIndex},
-            {"Combination", a.GetCodeEditorChildrenString(playerBlock, 0)},
-            {"Time", Math.Round(Time.deltaTime,2)}
-        });
-        
+        // AnalyticsEvent.Custom("BlocksCombination", new Dictionary<string, object>
+        // {
+        //     {"Level", SceneManager.GetActiveScene().buildIndex},
+        //     {"Combination", a.GetCodeEditorChildrenString(playerBlock, 0)},
+        //     {"Time", Math.Round(Time.deltaTime,2)}
+        // });
+        PlayerController.OnPlayerWins -= OnPlayerWinsHandler;
+        AnalyticsService.Instance.Flush();
         Debug.Log("analytics saved");
     }
 }
