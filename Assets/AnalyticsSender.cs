@@ -13,16 +13,16 @@ public class AnalyticsSender : MonoBehaviour
     [SerializeField] private Transform playerBlock;
     async void Start()
     {
-        try
-        {
-            await UnityServices.InitializeAsync();
-            //List<string> consentIdentifiers = await AnalyticsService.Instance.CheckForRequiredConsents();
-        }
-        catch (ConsentCheckException e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
+        // try
+        // {
+        //     await UnityServices.InitializeAsync();
+        //     //List<string> consentIdentifiers = await AnalyticsService.Instance.CheckForRequiredConsents();
+        // }
+        // catch (ConsentCheckException e)
+        // {
+        //     Console.WriteLine(e);
+        //     throw;
+        // }
     }
 
     private void OnEnable()
@@ -37,17 +37,17 @@ public class AnalyticsSender : MonoBehaviour
 
     void OnPlayerWinsHandler()
     {
-        GetHierarcy a = new GetHierarcy();
+        //GetHierarcy a = new GetHierarcy();
             
         //Debug.Log(a.GetCodeEditorChildrenString(playerBlock, 0));
 
         //Unity Analytics
-        AnalyticsService.Instance.CustomData("BlocksCombination", new Dictionary<string, object>
-        {
-            {"Level", SceneManager.GetActiveScene().buildIndex},
-            {"Combination", a.GetCodeEditorChildrenString(playerBlock, 0)},
-            {"Time", Math.Round(Time.deltaTime,2)}
-        });
+        // AnalyticsService.Instance.CustomData("BlocksCombination", new Dictionary<string, object>
+        // {
+        //     {"Level", SceneManager.GetActiveScene().buildIndex},
+        //     {"Combination", a.GetCodeEditorChildrenString(playerBlock, 0)},
+        //     {"Time", Math.Round(Time.deltaTime,2)}
+        // });
         
         //CustomEventManager.
         
@@ -57,8 +57,8 @@ public class AnalyticsSender : MonoBehaviour
         //     {"Combination", a.GetCodeEditorChildrenString(playerBlock, 0)},
         //     {"Time", Math.Round(Time.deltaTime,2)}
         // });
-        PlayerController.OnPlayerWins -= OnPlayerWinsHandler;
-        AnalyticsService.Instance.Flush();
-        Debug.Log("analytics saved");
+        //PlayerController.OnPlayerWins -= OnPlayerWinsHandler;
+        // AnalyticsService.Instance.Flush();
+        // Debug.Log("analytics saved");
     }
 }

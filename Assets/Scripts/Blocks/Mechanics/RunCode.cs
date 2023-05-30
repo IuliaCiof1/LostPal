@@ -120,6 +120,7 @@ namespace Blocks.Mechanics
             outline.enabled = false;
             StopAllCoroutines();
             runBtnComponent.enabled = true;
+            PlayerController.OnPlayerFails -= PlayerFailsHandler;
         }
     }
 }
