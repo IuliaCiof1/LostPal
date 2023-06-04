@@ -15,7 +15,7 @@ namespace Blocks
         {
             // outline =  transform.parent.GetComponent<Outline>();
             // outline.enabled = true;
-            
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
             player.GetComponent<PlayerController>().Move = true;
             player.GetComponent<PlayerController>().TargetPosition = player.transform.position + new Vector3(0.33f, 0,0);
 

@@ -33,7 +33,7 @@ public class CameraScale : MonoBehaviour
         else if(currAspectRatio < targetAspectRatio)
         {
             float differenceInSize = targetAspectRatio / currAspectRatio;
-            Debug.Log(screenWidth + " " + screenHeight + " " + size.bounds.size.x + " "+targetAspectRatio + " " + currAspectRatio + " " + differenceInSize);
+//            Debug.Log(screenWidth + " " + screenHeight + " " + size.bounds.size.x + " "+targetAspectRatio + " " + currAspectRatio + " " + differenceInSize);
             camera.orthographicSize = size.bounds.size.y / 2*differenceInSize; //fit the desired width
             camera.transform.position = size.transform.position;
         }

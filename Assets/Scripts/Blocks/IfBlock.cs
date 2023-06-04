@@ -25,7 +25,7 @@ namespace Blocks
         private void OnEnable()
         {
             
-            
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
             snapPoint = transform.parent.Find("SnapPoint");
             PlayerController.OnPlayerFails += PlayerFailsHandler;
             

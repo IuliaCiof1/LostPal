@@ -13,11 +13,12 @@ namespace RandomMapGenerator
             int i=0;
             while (waterPositions.Count>0)
             {
-                foreach (var position in waterPositions)
-                {
-                    tilemapVisualizer.PaintSingleWater(position);
-                }
-
+                // foreach (var position in waterPositions)
+                // {
+                //     tilemapVisualizer.PaintSingleWater(position);
+                // }
+                //
+                tilemapVisualizer.PaintSingleWater(waterPositions);
                 avoidPosition.UnionWith(waterPositions);
                 waterPositions=FindWaterPosition(avoidPosition, Direction2D.EightDirectionsList, widthPos, heightPos);
                 //Debug.Log("positions: " + waterPositions.Count);

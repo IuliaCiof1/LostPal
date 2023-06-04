@@ -162,6 +162,18 @@ public class PlayerController : MonoBehaviour
         {
             IsWin = true;
         }
+        else if (col.CompareTag("Tree"))
+        {
+            col.GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.4f);
+        }
+    }
+    
+    private void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.CompareTag("Tree"))
+        {
+            col.GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.4f);
+        }
     }
 
     public void RestartPosition()

@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: -6875287949331945261}
   m_Layer: 6
   m_Name: MoveS
-  m_TagString: Untagged
+  m_TagString: CodeBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -221,7 +221,7 @@ RectTransform:
   - {fileID: 7745168609838141446}
   - {fileID: 7745168610012065437}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -278,6 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 508179dd29eedc14fb20ed2ec658ca91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  raycastSize: 3
 --- !u!114 &7745168611314204613
 MonoBehaviour:
   m_ObjectHideFlags: 0

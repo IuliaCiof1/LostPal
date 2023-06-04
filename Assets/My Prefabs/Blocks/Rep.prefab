@@ -957,7 +957,7 @@ RectTransform:
   - {fileID: 5765210851743339087}
   - {fileID: 5765210851122225773}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -976,6 +976,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 508179dd29eedc14fb20ed2ec658ca91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  raycastSize: 3
 --- !u!222 &5765210851099076742
 CanvasRenderer:
   m_ObjectHideFlags: 0

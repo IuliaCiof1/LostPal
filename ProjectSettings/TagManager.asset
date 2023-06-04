@@ -10,6 +10,7 @@ TagManager:
   - ExpandableCodeBlock
   - CodeStorage
   - CodeEditor
+  - Tree
   layers:
   - Default
   - TransparentFX

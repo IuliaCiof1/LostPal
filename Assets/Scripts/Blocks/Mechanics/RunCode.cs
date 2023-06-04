@@ -31,6 +31,7 @@ namespace Blocks.Mechanics
         private string hierarchyString;
         private void Start()
         {
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
             runBtnComponent = GetComponent<Button>();
         }
 
@@ -120,7 +121,7 @@ namespace Blocks.Mechanics
             outline.enabled = false;
             StopAllCoroutines();
             runBtnComponent.enabled = true;
-            PlayerController.OnPlayerFails -= PlayerFailsHandler;
+            //PlayerController.OnPlayerFails -= PlayerFailsHandler;
         }
     }
 }

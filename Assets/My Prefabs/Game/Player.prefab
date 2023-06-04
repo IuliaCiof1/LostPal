@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4814217239623422709}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,7 +36,7 @@ Transform:
   m_Children:
   - {fileID: 4814217240744720849}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4814217239623422707
 SpriteRenderer:
@@ -184,7 +184,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0054730177, y: 0.120972395}
+  m_Offset: {x: 0.0054730177, y: 0.07499709}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -195,7 +195,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.33361876, y: 0.33756053}
+  m_Size: {x: 0.33361876, y: 0.2456099}
   m_EdgeRadius: 0
 --- !u!82 &4814217239623422709
 AudioSource:

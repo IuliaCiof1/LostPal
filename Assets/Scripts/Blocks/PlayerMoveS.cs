@@ -11,6 +11,7 @@ namespace Blocks
         //It will also enable movement
         public void OnEnable() 
         {
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
             player.GetComponent<PlayerController>().Move = true;
             player.GetComponent<PlayerController>().TargetPosition = player.transform.position + new Vector3(0, -0.33f,0);
             gameObject.SetActive(false);

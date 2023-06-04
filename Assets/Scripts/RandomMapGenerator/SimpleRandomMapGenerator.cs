@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 namespace RandomMapGenerator
@@ -14,10 +16,15 @@ namespace RandomMapGenerator
       [SerializeField] private float width, height;
       [SerializeField] private TilemapVisualizer tilemapVisualizer;
       [SerializeField] private GameObject coinPrefab;
-      [SerializeField] private GameObject playerPrefab, treePrefab;
+      [SerializeField] private GameObject playerPrefab;
+      [SerializeField] private GameObject[] treePrefab;
       [SerializeField] private int minNumberOfObstacles=1, maxNumberOfObstacles = 10;
       [SerializeField] private int minNumberOfTrees=1, maxNumberOfTrees = 10;
-      public void Start()
+      [SerializeField] private Vector2 offset=Vector2.zero;
+      [FormerlySerializedAs("distanceBetweenTrees")] [SerializeField] private float minDistanceTrees;
+      [SerializeField] private float minDistancePlayerCoin;
+
+      public void Awake() //Awake() always executes before Start()
       {
          //Endpoints
          float[] widthPos = { startPosition.x, startPosition.x + width };
@@ -34,28 +41,49 @@ namespace RandomMapGenerator
          //spawn trees
          InstantiateTrees(floorPositions);
          
-         //spawn coin
-         Instantiate(coinPrefab, GetRandomFloorPosition(floorPositions), Quaternion.identity);
          //spawn player
-         Instantiate(playerPrefab, GetRandomFloorPosition(floorPositions), Quaternion.identity);
+         GameObject player = Instantiate(playerPrefab, GetRandomFloorPosition(floorPositions)+offset, Quaternion.identity);
 
+         
+         for (int i = 0; i < 10; i++)
+         {
+            Vector2 pos = GetRandomFloorPosition(floorPositions) + offset;
+            if (Vector2.Distance(player.transform.position, pos) > minDistancePlayerCoin)
+            {
+               //spawn coin
+               Instantiate(coinPrefab, pos, Quaternion.identity);
+               break;
+            }
+         }
          
 
       }
 
       public void InstantiateTrees(HashSet<Vector2> floorPositions)
       {
-         int range = Random.Range(minNumberOfTrees, maxNumberOfTrees);
-         for (int i = 0; i <= maxNumberOfTrees; i++)
+         GameObject trees = Instantiate(new GameObject("Trees"));
+         List<GameObject> treesList = new List<GameObject>();
+         int randomNr = Random.Range(minNumberOfTrees, maxNumberOfTrees);
+         for (int i = 0; i <= randomNr; i++)
          {
             Vector2 pos = GetRandomFloorPosition(floorPositions);
-            Instantiate(treePrefab, pos, Quaternion.identity);
-            floorPositions.Remove(pos);
+
+            //only spawn tree if it's not too close to any other tree
+            if (treesList.TrueForAll(treeGameObject =>
+                   Vector2.Distance(treeGameObject.transform.position, pos) > minDistanceTrees))
+            {
+               GameObject tree = Instantiate(treePrefab[Random.Range(0, treePrefab.Length)], pos, Quaternion.identity,
+                  trees.transform);
+               treesList.Add(tree);
+               floorPositions.Remove(pos);
+            }
+           
          }
       }
-      public Vector3 GetRandomFloorPosition(HashSet<Vector2> floorPositions)
+      public Vector2 GetRandomFloorPosition(HashSet<Vector2> floorPositions)
       {
          Vector2 pos = Vector2.zero;
+         
          pos = floorPositions.ElementAt(Random.Range(0, floorPositions.Count-1));
          
          //var posit=tilemap.WorldToCell((Vector3)pos);

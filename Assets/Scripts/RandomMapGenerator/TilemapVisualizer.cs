@@ -32,16 +32,31 @@ namespace RandomMapGenerator
          ;
       public void PaintFloorTiles(IEnumerable<Vector2> floorPositions)
       {
-         PaintTiles(floorPositions, floorTilemap, floorTiles);
+         PaintTilesRandom(floorPositions, floorTilemap, floorTiles);
       }
 
-      public void PaintTiles(IEnumerable<Vector2>positions, Tilemap tilemap, TileBase[] tiles)
+      public void PaintTilesRandom(IEnumerable<Vector2>positions, Tilemap tilemap, TileBase[] tiles)
       {
          foreach (var position in positions)
          {
          
             PaintSingleTile(tilemap, tiles[Random.Range(0, tiles.Length-1)], position);
          }
+      }
+      
+      public void PaintTiles(IEnumerable<Vector2>positions, Tilemap tilemap, TileBase tile)
+      {
+         foreach (var position in positions)
+         {
+         
+            PaintSingleTile(tilemap, tile, position);
+         }
+         
+         //tilemap.GetComponent<TilemapCollider2D>().ProcessTilemapChanges(); //refresh tilemapcollider
+         TilemapCollider2D col = tilemap.GetComponent<TilemapCollider2D>();
+
+         col.enabled = false;
+         col.enabled = true;
       }
 
       public void PaintObstacles(int minRange, int maxRange, HashSet<Vector2> positions)
@@ -124,9 +139,9 @@ namespace RandomMapGenerator
             PaintSingleTile(wallTilemap, tile, position);
       }
 
-      public void PaintSingleWater(Vector2 position)
+      public void PaintSingleWater(IEnumerable<Vector2> position)
       {
-         PaintSingleTile(waterTilemap, water, position);
+         PaintTiles(position, waterTilemap, water);
       }
 
       
