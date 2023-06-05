@@ -174,69 +174,62 @@ namespace Blocks.Mechanics
             //DragObject firstOverlapBlock = overlappedBlocks.ElementAt(0);
 
             int editorOverlap = RectOverlap(draggingObjectRT, CodeEditor);
-            if (editorOverlap >= 99)
+            if (editorOverlap >= 99) //the block was dropped on CodeEditor
             {
                 OnDropOnObjectSound?.Invoke(0);
-               // parentOfDraggingObject = CodeEditor;
-                Debug.Log("parent to code editor");
-                //int newIndex = parentOfDraggingObject.transform.parent.childCount - 1;
-                //List<DragObject> overlappedBlocks = GetOverlapBlocks(CodeEditor);
-                //Debug.Log(overlappedBlocks.Count);
+
                 ExpandableDragObject expandableBlock = null;
 
-                if ((expandableBlock = ExpandableBlockOverlap(CodeEditor)) is not null)
-                {
+                if ((expandableBlock = ExpandableBlockOverlap(CodeEditor)) is not null)  //the block was dropped on an Expandable block
+                {     //blocks can be ordered only if they are in an Expandable block
                     
-                    List<DragObject> overlappedBlocks = GetOverlapBlocks(CodeEditor);
-                    int newIndex = expandableBlock.transform.parent.childCount - 1;
-                    Debug.Log("overlappedBlocks count = " + overlappedBlocks.Count);
-                    if (overlappedBlocks.Count == 2)
+                    List<DragObject> overlappedBlocks = GetOverlapBlocks(CodeEditor);  //get the blocks under this block, they must be siblings, the parent block is excluded
+                    
+                    Transform snapPoint = expandableBlock.transform.Find("SnapPoint");
+                    int newIndex = snapPoint.childCount;
+                    
+                    if (overlappedBlocks.Count == 2) //there are 2 blocks underneath. Move this block between those 2
                     {
                         newIndex = overlappedBlocks.ElementAt(0).transform.GetSiblingIndex() + 1;
                         parentOfDraggingObject = overlappedBlocks.ElementAt(0).transform.parent;
-                        Debug.Log("move on sibling index "+newIndex + " between " + overlappedBlocks.ElementAt(0).name + " and " + overlappedBlocks.ElementAt(1).name);
                         ExpandParentBlocks(expandableBlock);
-                        //transform.SetSiblingIndex(newIndex);
+                    
                     }
-                    else if (overlappedBlocks.Count == 1)
+                    else if (overlappedBlocks.Count == 1) //there is only 1 block underneath
                     {
                         ExpandableDragObject expandableBlockInside;
                         
                         if ((expandableBlockInside = overlappedBlocks.ElementAt(0).GetComponent<ExpandableDragObject>()) is not null &&
-                        RectOverlap(expandableBlockInside.GetComponent<RectTransform>(), draggingObjectRT) >= 65)
-                        {
+                        RectOverlap(expandableBlockInside.GetComponent<RectTransform>(), draggingObjectRT) >= 65) //check if that 1 block is Expandable and that it overlaps with this block 65% or more
+                        {  //place this block inside that 1 block
                             OnDropOnObjectSound?.Invoke(1);
 
                             ExpandParentBlocks(expandableBlockInside);
-                            Transform snapPoint = expandableBlockInside.transform.Find("SnapPoint");
+                            snapPoint = expandableBlockInside.transform.Find("SnapPoint");
                             parentOfDraggingObject = snapPoint;
                         }
-                        else 
+                        else //otherwise we want to place this block above or below that block
                         {
-                            Debug.Log("overlappedBlocks.ElementAt(0).name = " + overlappedBlocks.ElementAt(0).name);
-                            if (overlappedBlocks[0].transform.position.y < transform.position.y)
+                            if (overlappedBlocks[0].transform.position.y < transform.position.y) //place it above the block
                             {
                                 newIndex = overlappedBlocks.ElementAt(0).transform.GetSiblingIndex();
-                                Debug.Log("move above " + overlappedBlocks.ElementAt(0).name);
                             }
-                            else
+                            else  //place it below the block
                                 newIndex = overlappedBlocks.ElementAt(0).transform.GetSiblingIndex() + 1;
 
                             parentOfDraggingObject = overlappedBlocks.ElementAt(0).transform.parent;
-                            if (transform.parent != overlappedBlocks.ElementAt(0).transform.parent)
-                                //parentOfDraggingObject.parent.GetComponent<ExpandableDragObject>().Expand(draggingObjectRT);
-                                ExpandParentBlocks(parentOfDraggingObject.parent.GetComponent<ExpandableDragObject>());
+                            
+                            ExpandParentBlocks(parentOfDraggingObject.parent.GetComponent<ExpandableDragObject>());
 
                         }
                     }
-                    else
+                    else //there are no blocks to order, the expandable block is empty
                     {
                         OnDropOnObjectSound?.Invoke(1);
 
                         ExpandParentBlocks(expandableBlock);
-                        Transform snapPoint = expandableBlock.transform.Find("SnapPoint");
+                        
                         parentOfDraggingObject = snapPoint;
-                        Debug.Log("the block under is expandable and empty");
                     }
 
 
@@ -246,30 +239,27 @@ namespace Blocks.Mechanics
                     transform.SetParent(parentOfDraggingObject);
                     transform.SetSiblingIndex(newIndex);
                 }
-                else
+                else  //if the this block is not placed in in an expandable block just parent it ti CodeEditor
                 {
                     parentOfDraggingObject = CodeEditor;
                     transform.SetParent(parentOfDraggingObject);
                 }
                 
             }
-            //Check if the dragged object doesn't overlap with the code editor and parent it to CodeStorage
-            else if (editorOverlap < 99)
+            else if (editorOverlap < 99)  //the block was not fully dropped in CodeEditor, the block goes to CodeStorage
             {
                 OnDropOnObjectSound?.Invoke(0);
                 parentOfDraggingObject = CodeStorage;
-                Debug.Log("storage");
+
 
                 //When the expandable block returns to CodeStorage, unparent all the contained blocks from this expandable block
                 if (CompareTag("ExpandableCodeBlock"))
                 {
-                    Debug.Log("name of dragging object " + draggingObjectRT.name);
                     MoveNestedBlocksToCodeStorage(GetComponent<ExpandableDragObject>());
                     parentOfDraggingObject = CodeStorage;
                 }
 
                 transform.SetParent(parentOfDraggingObject);
-                //  Debug.Log("parent to code storage");
 
             }
             
@@ -335,9 +325,7 @@ namespace Blocks.Mechanics
         
         
         //Function takes 2 rects as input and returns:
-        //-1 if the 2 rectangles don't overlap,
-        //0 if the area of a rect fully overlaps the other rect,
-        //a number greater than 0 that represents the area overlapped
+        //the percentage of the overlapping
         public int RectOverlap(RectTransform rect1, RectTransform rect2)
         {
             Vector3[] r1 = new Vector3[4];
@@ -406,52 +394,33 @@ namespace Blocks.Mechanics
             return null;
         }
 
+        //Get the blocks under this block. Those blocks need to have the same parent
         public List<DragObject> GetOverlapBlocks(Transform container)
         {
             DragObject [] blocks = container.GetComponentsInChildren<DragObject>();
             List<DragObject> overlappedBlocks = new List<DragObject>();
-            // Debug.Log("Blocks length: "+container.childCount);
-            //
-            // for(int i=container.childCount; i>=0; i--)
-                //Debug.Log("Blocks[" + i + "] = " + blocks[i].name);
-            // for(int i=container.childCount-1; i>=0; i--){ //-2 to exclude this block that is currently the last sibling in hierarcy
-            //
-            //     Transform child = container.GetChild(i);
-            //     Debug.Log("child in GetOverlapBlocks "+child.name + " i="+i);
-            //     if (child!=transform && ((child.CompareTag("CodeBlock") || child.CompareTag("ExpandableCodeBlock")) && RectOverlap(draggingObjectRT, child.GetComponent<RectTransform>())>=0))
-            //     {
-            //         overlappedBlocks.Add(child);
-            //         Debug.Log(child.name + " " + "index: " + i);
-            //     }
-            // }
 
-            for(int i=0; i<blocks.Length; i++){ //-2 to exclude this block that is currently the last sibling in hierarcy
+            for(int i=0; i<blocks.Length; i++){
 
                 DragObject child = blocks[i];
-                //Debug.Log("child in GetOverlapBlocks "+child.name + " i="+i);
+                
                 if (child.transform!=transform && child.name!="Player" && ((child.CompareTag("CodeBlock") || child.CompareTag("ExpandableCodeBlock")) && RectOverlap(draggingObjectRT, child.GetComponent<RectTransform>())>0))
                 {
                     overlappedBlocks.Add(child);
-                    Debug.Log(child.name + " " + "index: " + i);
                 }
             }
 
+            //remove unwanted blocks (parents)
             for (int i=0; i<overlappedBlocks.Count-1; i++)
             {
                 Debug.Log("block "+ overlappedBlocks.ElementAt(i).transform.name+" next block parent is "+ overlappedBlocks.ElementAt(i + 1).transform.parent);
                 if (overlappedBlocks.ElementAt(i).transform.parent != overlappedBlocks.ElementAt(i + 1).transform.parent.parent)
                 {
                     overlappedBlocks.RemoveAt(i);
-                    Debug.Log("remove block "+ overlappedBlocks.ElementAt(i).name);
                     i--;
                 }
             }
 
-            foreach (var block in overlappedBlocks)
-            {
-                Debug.Log("child in GetOverlapBlocks "+block.name);
-            }
-            
             return overlappedBlocks;
         }
     }

@@ -1,9 +1,12 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 namespace RandomMapGenerator
 {
@@ -23,7 +26,7 @@ namespace RandomMapGenerator
       [SerializeField] private Vector2 offset=Vector2.zero;
       [FormerlySerializedAs("distanceBetweenTrees")] [SerializeField] private float minDistanceTrees;
       [SerializeField] private float minDistancePlayerCoin;
-
+      private HashSet<Vector2> wallPositions;
       public void Awake() //Awake() always executes before Start()
       {
          //Endpoints
@@ -33,7 +36,7 @@ namespace RandomMapGenerator
          HashSet<Vector2> floorPositions = RunRandomWalk(widthPos, heightPos);
          tilemapVisualizer.PaintFloorTiles(floorPositions);
          
-         HashSet<Vector2> wallPositions = WallGenerator.CreateWalls(floorPositions, tilemapVisualizer);
+         wallPositions = WallGenerator.CreateWalls(floorPositions, tilemapVisualizer);
          WaterGenerator.CreateWater(floorPositions, tilemapVisualizer, widthPos, heightPos);
          
          //spawn obstacle
@@ -42,13 +45,13 @@ namespace RandomMapGenerator
          InstantiateTrees(floorPositions);
          
          //spawn player
-         GameObject player = Instantiate(playerPrefab, GetRandomFloorPosition(floorPositions)+offset, Quaternion.identity);
+         GameObject player = Instantiate(playerPrefab, GetRandomFloorPosition(floorPositions) + offset,
+                    Quaternion.identity);
 
-         
          for (int i = 0; i < 10; i++)
          {
             Vector2 pos = GetRandomFloorPosition(floorPositions) + offset;
-            if (Vector2.Distance(player.transform.position, pos) > minDistancePlayerCoin)
+            if (Vector2.Distance(player.transform.position, pos) > minDistancePlayerCoin )
             {
                //spawn coin
                Instantiate(coinPrefab, pos, Quaternion.identity);
@@ -83,12 +86,14 @@ namespace RandomMapGenerator
       public Vector2 GetRandomFloorPosition(HashSet<Vector2> floorPositions)
       {
          Vector2 pos = Vector2.zero;
+
          
-         pos = floorPositions.ElementAt(Random.Range(0, floorPositions.Count-1));
+            pos = floorPositions.ElementAt(Random.Range(0, floorPositions.Count - 1));
+            
+               return pos;
+            
          
-         //var posit=tilemap.WorldToCell((Vector3)pos);
-         //Debug.Log("player " + pos);
-         return pos;
+        
       } 
    
       public HashSet<Vector2> RunRandomWalk(float[] widthPos, float[] heightPos)

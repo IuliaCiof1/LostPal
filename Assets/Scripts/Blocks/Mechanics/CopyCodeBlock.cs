@@ -7,17 +7,22 @@ namespace Blocks.Mechanics
     {
         private Transform CodeStorage;
         private bool copied = false;
+        private int siblingIndex;
         private void Awake()
         {
-            CodeStorage = GameObject.FindGameObjectWithTag("CodeStorage").GetComponent<RectTransform>(); ;
+            CodeStorage = GameObject.FindGameObjectWithTag("CodeStorage").GetComponent<RectTransform>();
+            // siblingIndex = transform.GetSiblingIndex();
+            // Debug.Log(siblingIndex + "index copy and prent is " + transform.parent);
+
         }
     
         public void OnBeginDrag(PointerEventData eventData)
         {
             if (!copied)
             {
-//                Debug.Log("copy");
+               // Debug.Log(siblingIndex + "index copy and prent is " + transform.parent);
                 GameObject copy = Instantiate(this, transform.position, Quaternion.identity, CodeStorage).gameObject;
+                //copy.transform.SetSiblingIndex(siblingIndex);
                 copied = true;
             }
         }
